@@ -1,0 +1,18 @@
+{
+  "required": "{field} is required",
+  "string": "{field} must be string",
+  "email": "{field} must be correct email address",
+  "unique": "{field} already exists",
+  "min": "{field} must be at least {value}",
+  "max": "{field} must be no more than {value}",
+  "date": "{field} must be correct date",
+  "dateFormat": "{field} must be date format: {value}",
+  "after": "{field} must be later than {value}",
+  "in": "{field} must match one value from the list: {value}",
+  "above": "{field} must be greater than {value}",
+  "confirmed": "{field}s do not match",
+  "number": "{field} must be number",
+  "integer": "{field} must be integer",
+  "boolean": "{field} not a boolean type",
+  "url": "{field} must by correct url address"
+}
