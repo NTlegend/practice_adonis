@@ -8,7 +8,6 @@
   "date": "{field} must be correct date",
   "dateFormat": "{field} must be date format: {value}",
   "after": "{field} must be later than {value}",
-  "in": "{field} must match one value from the list: {value}",
   "above": "{field} must be greater than {value}",
   "confirmed": "{field}s do not match",
   "number": "{field} must be number",

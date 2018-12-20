@@ -1,5 +1,7 @@
 const Antl = use('Antl');
-const { ucFirst, getSubstring } = use('App/Helpers/string');
+const FileHelper = use('App/Helpers/file');
+const Helpers = use('Helpers');
+const _ = use('lodash');
 
 /**
  * Generates a validation failure message using the field and its validation rules
@@ -7,38 +9,31 @@ const { ucFirst, getSubstring } = use('App/Helpers/string');
  *
  * @param field
  * @param rule
- * @returns {{field: *, message: *, validation: *}}
+ * @param locale
+ * @param messagesFileName
+ * @returns {{field: *, message: *, validation: (*|string)}}
  */
 
-function generateMessage(field, rule) {
+function generateMessage({ field, rule, messagesFileName, locale }) {
+  let fileName = 'core';
+  if (FileHelper.exists(Helpers.resourcesPath(`locales/${locale}/${messagesFileName}.json`))) {
+    fileName = messagesFileName;
+  }
+  let validation = rule;
+  let value = null;
+  if (rule.includes(':')) {
+    const colonPosition = rule.indexOf(':');
+    validation = rule.substring(0, colonPosition);
+    value = rule.substring(colonPosition + 1, rule.includes(',') ? rule.indexOf(',') : rule.length);
+  }
   return {
     field,
-    validation: getSubstring(rule, null, ':'),
-    message: Antl.formatMessage(`validation.${getSubstring(rule, null, ':')}`, {
-      field: ucFirst(field),
-      value: getSubstring(rule, null, ':') === 'in' ? getSubstring(rule, ':', null) : getSubstring(rule, ':', ',')
+    validation,
+    message: Antl.forLocale(locale).formatMessage(`${fileName}.${validation}`, {
+      field: _.capitalize(field),
+      value
     })
   };
 }
 
-/**
- * Generates messages from the rule object
- *
- * @param rules
- * @param locale
- */
-function createMessagesObj(rules) {
-  const messagesObj = {};
-  for (const key in rules) {
-    if (rules.hasOwnProperty(key)) {
-      rules[key].split('|').forEach(rule => {
-        const { field, message, validation } = generateMessage(key, rule);
-        messagesObj[`${field}.${validation}`] = message;
-      });
-    }
-  }
-
-  return messagesObj;
-}
-
-module.exports = createMessagesObj;
+module.exports = generateMessage;

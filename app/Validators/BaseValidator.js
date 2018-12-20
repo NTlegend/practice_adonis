@@ -1,4 +1,5 @@
-const createMessagesObj = use('App/Helpers/validation');
+const generateMessage = use('App/Helpers/validation');
+const Config = use('Config');
 
 class BaseValidator {
   get validateAll() {
@@ -6,7 +7,23 @@ class BaseValidator {
   }
 
   get messages() {
-    return createMessagesObj(this.rules);
+    const messages = {};
+    const locale = this.ctx ? this.ctx.locale : Config.get('app.locales.locale');
+    const messagesFileName = this.constructor.name.replace('Validator', '').toLowerCase();
+    for (const key in this.rules) {
+      if (this.rules.hasOwnProperty(key)) {
+        this.rules[key].split('|').forEach(rule => {
+          const { field, message, validation } = generateMessage({
+            messagesFileName,
+            field: key,
+            locale,
+            rule
+          });
+          messages[`${field}.${validation}`] = message;
+        });
+      }
+    }
+    return messages;
   }
 }
 

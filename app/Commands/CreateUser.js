@@ -19,6 +19,7 @@ class CreateUser extends Command {
     const answers = {
       role: await this.choice('Role', ['Admin', 'User']),
       email: await this.ask('Email'),
+      username: await this.ask('Username (max:20)'),
       password: await this.secure('Password (min:6 | max:25)'),
       password_confirmation: await this.secure('Confirm password')
     };
@@ -27,14 +28,15 @@ class CreateUser extends Command {
     const validation = await validate(answers, rules, messages);
     if (validation.fails()) {
       this.error(`${this.icon('error')}  ${validation.messages()[0].message}`);
+      process.exit(1);
     } else {
       delete answers.password_confirmation;
       const user = await User.create(answers);
       user.rawPassword = answers.password;
-      Event.fire('new::user', user);
+      Event.fire('createUser', user);
       this.success(`${this.icon('success')}  ${answers.role} created`);
+      Database.close();
     }
-    Database.close();
   }
 }
 
