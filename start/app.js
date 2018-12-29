@@ -13,7 +13,11 @@ const providers = [
   '@adonisjs/auth/providers/AuthProvider',
   '@adonisjs/bodyparser/providers/BodyParserProvider',
   '@adonisjs/cors/providers/CorsProvider',
-  '@adonisjs/lucid/providers/LucidProvider'
+  '@adonisjs/lucid/providers/LucidProvider',
+  '@adonisjs/antl/providers/AntlProvider',
+  '@adonisjs/validator/providers/ValidatorProvider',
+  '@adonisjs/framework/providers/ViewProvider',
+  '@adonisjs/mail/providers/MailProvider'
 ];
 
 /*
@@ -49,6 +53,6 @@ const aliases = {};
 | Here you store ace commands for your package
 |
 */
-const commands = [];
+const commands = ['App/Commands/CreateUser'];
 
 module.exports = { providers, aceProviders, aliases, commands };
