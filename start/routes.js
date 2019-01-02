@@ -18,4 +18,10 @@ Route.get('/', () => ({ status: 'Ok', version: '1.0.0' }));
 
 Route.post('/login', 'AuthController.login');
 
-Route.get('/products', 'ProductController:index');
+Route.get('/products', 'ProductController.index');
+
+Route.get('/types', 'TypeController.index');
+Route.get('/types/:id', 'TypeController.show');
+Route.delete('/types/:id', 'TypeController.delete');
+
+Route.get('/types/:id/attrs', 'AttrController.index');
