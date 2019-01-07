@@ -3,7 +3,7 @@ const Antl = use('Antl');
 const Env = use('Env');
 
 class TypeController {
-  async index({ request, response }) {
+  async index({ request }) {
     const {
       page = 1,
       perPage = Env.get('PAGINATE_LIMIT', 10),
@@ -11,38 +11,42 @@ class TypeController {
       order = 'id',
       sort = 'ASC'
     } = request.all();
-    const types = await Type.getTypes({ page, perPage, search, order, sort });
-    return response.json(types);
+    return Type.getTypes({ page, perPage, search, order, sort });
   }
 
-  async show({ response, params }) {
-    const type = await Type.getSingleType(params.id);
-    return response.json(type);
+  async show({ params }) {
+    return Type.getSingleType(params.id);
   }
 
   async store({ request, response }) {
-    const newType = await Type.create({ title: request.input('title') });
-    await newType.attributes().sync(request.input('attributes').split(','));
+    await Type.create({ title: request.input('title') });
     return response.status(201).json({ message: Antl.formatMessage('messages.created') });
+  }
+
+  async addAttribute({ params, response }) {
+    const type = await Type.findOrFail(params.id);
+    await type.attributes().attach([params.attributeId]);
+    return response.json('Attribute added');
+  }
+
+  async removeAttribute({ params, response }) {
+    const type = await Type.findOrFail(params.id);
+    await type.attributes().detach([params.attributeId]);
+    return response.json('Attribute removed');
   }
 
   async update({ request, response, params }) {
     const type = await Type.findOrFail(params.id);
-    const { title, attributes } = request.all();
-    if (title) {
-      type.title = title;
-      await type.save();
-    }
-    if (attributes) {
-      await type.attributes().sync(request.input('attributes').split(','));
-    }
+    const { title } = request.all();
+    type.title = title;
+    await type.save();
     return response.json({ message: Antl.formatMessage('messages.updated') });
   }
 
   async destroy({ response, params }) {
     const type = await Type.findOrFail(params.id);
     await type.delete();
-    return response.json({ message: Antl.formatMessage('messages.deleted') });
+    return response.status(204);
   }
 }
 

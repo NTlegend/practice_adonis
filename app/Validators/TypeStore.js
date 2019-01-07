@@ -1,6 +1,6 @@
 const BaseValidator = use('App/Validators/BaseValidator');
 
-class Store extends BaseValidator {
+class TypeStore extends BaseValidator {
   get rules() {
     return {
       title: 'required|min:2|max:20',
@@ -9,4 +9,4 @@ class Store extends BaseValidator {
   }
 }
 
-module.exports = Store;
+module.exports = TypeStore;
