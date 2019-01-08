@@ -6,8 +6,16 @@ class Type extends Model {
     this.addTrait('App/Models/Traits/Repository');
   }
 
+  static get createdAtColumn() {
+    return null;
+  }
+
+  static get updatedAtColumn() {
+    return null;
+  }
+
   attributes() {
-    return this.belongsToMany('App/Models/Attribute');
+    return this.hasMany('App/Models/Attribute');
   }
 }
 

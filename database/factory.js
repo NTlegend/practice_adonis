@@ -5,5 +5,6 @@ Factory.blueprint('App/Models/Type', async (faker, i, data) => ({
 }));
 
 Factory.blueprint('App/Models/Attribute', async (faker, i, data) => ({
-  title: data.title || faker.word({ length: 5 })
+  title: data.title || faker.word({ length: 5 }),
+  'type_id': data.typeId
 }));

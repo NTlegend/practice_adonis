@@ -23,18 +23,6 @@ class TypeController {
     return response.status(201).json({ message: Antl.formatMessage('messages.created') });
   }
 
-  async addAttribute({ params, response }) {
-    const type = await Type.findOrFail(params.id);
-    await type.attributes().attach([params.attributeId]);
-    return response.json('Attribute added');
-  }
-
-  async removeAttribute({ params, response }) {
-    const type = await Type.findOrFail(params.id);
-    await type.attributes().detach([params.attributeId]);
-    return response.json('Attribute removed');
-  }
-
   async update({ request, response, params }) {
     const type = await Type.findOrFail(params.id);
     const { title } = request.all();

@@ -19,14 +19,15 @@ class AttributeController {
   }
 
   async store({ request, response }) {
-    await Attribute.create({ title: request.input('title') });
+    const { title, typeId } = request.all();
+    await Attribute.create({ title, type_id: typeId });
     return response.status(201).json({ message: Antl.formatMessage('messages.created') });
   }
 
   async update({ request, response, params }) {
     const attribute = await Attribute.findOrFail(params.id);
-    const { title } = request.all();
-    attribute.title = title;
+    const data = request.only(['title', 'type_id']);
+    attribute.merge(data);
     await attribute.save();
     return response.json({ message: Antl.formatMessage('messages.updated') });
   }

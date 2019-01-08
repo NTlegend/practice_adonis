@@ -3,8 +3,7 @@ const BaseValidator = use('App/Validators/BaseValidator');
 class TypeStore extends BaseValidator {
   get rules() {
     return {
-      title: 'required|min:2|max:20',
-      attributes: 'required'
+      title: 'required|min:2|max:20'
     };
   }
 }

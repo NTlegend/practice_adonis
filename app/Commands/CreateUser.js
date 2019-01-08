@@ -1,6 +1,6 @@
 const { Command } = require('@adonisjs/ace');
 
-const Registration = use('App/Validators/Auth/Registration');
+const Registration = use('App/Validators/Registration');
 const { validate } = use('Validator');
 const User = use('App/Models/User');
 const Database = use('Database');
