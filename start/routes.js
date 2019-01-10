@@ -19,6 +19,7 @@ Route.get('/', () => ({ status: 'Ok', version: '1.0.0' }));
 Route.post('/login', 'AuthController.login');
 
 Route.get('/products', 'ProductController.index');
+Route.post('/products', 'ProductController.store').validator('StoreProduct');
 
 Route.get('/types', 'TypeController.index');
 Route.get('/types/:id', 'TypeController.show');

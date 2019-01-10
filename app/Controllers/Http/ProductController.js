@@ -20,6 +20,10 @@ class ProductController {
   async index() {
     return Product.all();
   }
+
+  async store() {
+    return { message: 'Ok' };
+  }
 }
 
 module.exports = ProductController;

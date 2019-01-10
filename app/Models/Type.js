@@ -14,6 +14,14 @@ class Type extends Model {
   static get createdAtColumn() {
     return null;
   }
+
+  products() {
+    return this.hasMany('App/Models/Product');
+  }
+
+  attrs() {
+    return this.hasMany('App/Models/Attr');
+  }
 }
 
 module.exports = Type;
