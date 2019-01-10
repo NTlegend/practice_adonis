@@ -21,8 +21,8 @@ class ProductController {
     return Product.all();
   }
 
-  async store() {
-    return { message: 'Ok' };
+  async store({ auth }) {
+    return auth.getUser();
   }
 }
 

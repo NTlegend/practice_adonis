@@ -1,9 +1,12 @@
 class Type {
   static async findByName(name) {
-    const {rows: result } = await this.query().where({name: name}).fetch();
-    return result;
+    const query = this.query();
+    if (name) {
+      query.where({ name });
+    }
+
+    return query.fetch();
   }
 }
-
 
 module.exports = Type;

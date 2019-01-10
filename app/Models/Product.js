@@ -9,6 +9,14 @@ class Product extends Model {
   type() {
     return this.belongsTo('App/Models/Type');
   }
+
+  user() {
+    return this.belongsTo('App/Models/User');
+  }
+
+  attrs() {
+    return this.belongsToMany('App/Models/Attr').pivotModel('App/Models/ProductAttr');
+  }
 }
 
 module.exports = Product;

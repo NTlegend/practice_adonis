@@ -16,12 +16,14 @@ const Route = use('Route');
 
 Route.get('/', () => ({ status: 'Ok', version: '1.0.0' }));
 
-Route.post('/login', 'AuthController.login');
+Route.post('/login', 'AuthController.login').middleware('guest');
 
 Route.get('/products', 'ProductController.index');
-Route.post('/products', 'ProductController.store').validator('StoreProduct');
+Route.post('/products', 'ProductController.store')
+  .validator('StoreProduct')
+  .middleware('auth');
 
-Route.get('/types', 'TypeController.index');
+Route.get('/types', 'TypeController.index').middleware(['auth', 'is:admin']);
 Route.get('/types/:id', 'TypeController.show');
 Route.delete('/types/:id', 'TypeController.delete');
 

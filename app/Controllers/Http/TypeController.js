@@ -19,7 +19,7 @@ class TypeController {
    */
   async index({ request }) {
     const { name } = request.all();
-    return Type.findByName(name);;
+    return Type.findByName(name);
   }
 
   async delete({ params, response }) {
@@ -28,7 +28,7 @@ class TypeController {
     const type = await Type.findOrFail(id);
     await type.delete();
 
-    return response.json({msg: 'Ok'});
+    return response.json({ msg: 'Ok' });
   }
 }
 
