@@ -5,7 +5,7 @@ class TypeSeeder {
   async run() {
     await Type.query().delete();
 
-    const types = [{ name: 'notebook' }, { name: 'phone' }, { name: 'car' }];
+    const types = [{ name: 'Laptop' }, { name: 'SmartPhone' }, { name: 'Tablet' }];
 
     await Type.createMany(types);
   }

@@ -6,8 +6,12 @@ class Product extends Model {
     return null;
   }
 
-  type() {
-    return this.belongsTo('App/Models/Type');
+  types() {
+    return this.hasMany('App/Models/Type');
+  }
+
+  users() {
+    return this.hasMany('App/Models/User');
   }
 }
 

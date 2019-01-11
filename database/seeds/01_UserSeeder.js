@@ -1,7 +1,9 @@
 /** @type {import('@adonisjs/lucid/src/Factory')} */
+const Factory = use('Factory');
+
 class UserSeeder {
   async run() {
-    // not implemented
+    const users = await Factory.model('App/Models/User').createMany(3);
   }
 }
 

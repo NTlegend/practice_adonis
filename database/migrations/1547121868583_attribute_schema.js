@@ -8,6 +8,17 @@ class AttributeSchema extends Schema {
     this.create('attributes', (table) => {
       table.increments()
       table.timestamps()
+      table
+        .string('name')
+        .notNullable();
+      table
+        .integer('type_id')
+        .notNullable();
+      table
+        .foreign('type_id')
+        .references('id')
+        .on('types')
+        .onDelete('cascade');
     })
   }
 
