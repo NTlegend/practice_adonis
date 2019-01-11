@@ -1,5 +1,4 @@
 const Type = use('App/Models/Type');
-const Antl = use('Antl');
 const Env = use('Env');
 
 class TypeController {
@@ -19,8 +18,8 @@ class TypeController {
   }
 
   async store({ request, response }) {
-    await Type.create({ title: request.input('title') });
-    return response.status(201).json({ message: Antl.formatMessage('messages.created') });
+    const newType = await Type.create({ title: request.input('title') });
+    return response.status(201).json(newType);
   }
 
   async update({ request, response, params }) {
@@ -28,13 +27,13 @@ class TypeController {
     const { title } = request.all();
     type.title = title;
     await type.save();
-    return response.json({ message: Antl.formatMessage('messages.updated') });
+    return response.json(type);
   }
 
   async destroy({ response, params }) {
     const type = await Type.findOrFail(params.id);
     await type.delete();
-    return response.status(204);
+    return response.status(204).send();
   }
 }
 

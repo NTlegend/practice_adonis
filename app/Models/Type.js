@@ -1,11 +1,6 @@
-const Model = use('Model');
+const Base = require('./Base');
 
-class Type extends Model {
-  static boot() {
-    super.boot();
-    this.addTrait('App/Models/Traits/Repository');
-  }
-
+class Type extends Base {
   static get createdAtColumn() {
     return null;
   }

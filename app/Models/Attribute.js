@@ -1,11 +1,5 @@
-const Model = use('Model');
-
-class Attribute extends Model {
-  static boot() {
-    super.boot();
-    this.addTrait('App/Models/Traits/Repository');
-  }
-
+const Base = require('./Base');
+class Attribute extends Base {
   static get createdAtColumn() {
     return null;
   }
