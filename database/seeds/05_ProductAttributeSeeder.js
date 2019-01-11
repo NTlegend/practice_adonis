@@ -1,10 +1,10 @@
-
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 // const Factory = use('Factory')
+const ProductAttribute = use('App/Models/ProductAttribute');
 
 class ProductAttributeSeeder {
   async run () {
-    async ProductAttribute.query().delete();
+    await ProductAttribute.query().delete();
     const prodAttrMatching = [
         { product_id:1, attribute_id: 1, value: 'Normal'}, 
         { product_id:2, attribute_id: 1, value: 'Normal' },
@@ -18,4 +18,4 @@ class ProductAttributeSeeder {
   }
 }
 
-module.exports = ProductAttributeSeeder
+module.exports = ProductAttributeSeeder;

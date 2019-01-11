@@ -13,6 +13,9 @@ class UserSchema extends Schema {
         .string('email', 254)
         .notNullable()
         .unique();
+      table
+        .string('role',20)
+        .notNullable();
       table.string('password', 60).notNullable();
       table.timestamps();
     });

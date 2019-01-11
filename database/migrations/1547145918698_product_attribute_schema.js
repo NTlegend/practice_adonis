@@ -3,7 +3,7 @@ const Schema = use('Schema');
 
 class ProductAtributeSchema extends Schema {
   up() {
-    this.create('productAttributes', table => {
+    this.create('product_attributes', table => {
       table.increments();
       table.timestamps();
       table.integer('product_id').notNullable();
