@@ -15,3 +15,10 @@
 const Route = use('Route');
 
 Route.get('/', () => ({ status: 'Ok', version: '1.0.0' }));
+
+Route.get('/login', 'AuthController.login');
+Route.get('/users', () => ({users: 'test users'}));
+
+Route.resource('products', 'ProductController').apiOnly();
+Route.resource('types', 'TypeController').apiOnly();
+Route.resource('attributes', 'AttributeController').apiOnly();
