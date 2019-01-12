@@ -1,6 +1,7 @@
 {
   "required": "{field} is required",
   "string": "{field} must be string",
+  "exist": "{field} not exist in {value}",
   "email": "{field} must be correct email address",
   "unique": "{field} already exists",
   "min": "{field} must be at least {value}",
