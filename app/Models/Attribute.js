@@ -2,12 +2,14 @@
 const Model = use('Model');
 
 class Attribute extends Model {
-  types() {
-    return this.hasOne('App/Models/Type');
+  type() {
+    return this.belongsTo('App/Models/Type');
   }
 
   products() {
-    return this.belongsToMany('App/Models/Product');
+    return this.belongsToMany('App/Models/Product')
+      .pivotTable('product_attributes')
+      .withPivot(['value']);
   }
 }
 

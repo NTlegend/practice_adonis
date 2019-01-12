@@ -2,6 +2,10 @@
 const Model = use('Model');
 
 class Product extends Model {
+  static get hidden() {
+    return ['user_id', 'type_id'];
+  }
+
   type() {
     return this.hasOne('App/Models/Type');
   }
@@ -11,7 +15,7 @@ class Product extends Model {
   }
 
   attributes() {
-    return this.belongsToMany('App/Models/Attribute');
+    return this.belongsToMany('App/Models/Attribute').withPivot(['value']);
   }
 }
 

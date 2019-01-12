@@ -16,7 +16,7 @@ const Route = use('Route');
 
 Route.get('/', () => ({ status: 'Ok', version: '1.0.0' }));
 
-['products', 'productAttributes', 'users', 'types'].forEach(controller => {
+['products', 'attributes', 'users', 'types'].forEach(controller => {
   const controllerClass = `${controller.charAt(0).toUpperCase() + controller.slice(1)}Controller`;
   Route.get(`/${controller}`, `${controllerClass}.index`);
   Route.post(`/${controller}`, `${controllerClass}.store`);
