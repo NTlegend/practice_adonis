@@ -16,12 +16,12 @@ const Route = use('Route');
 
 Route.get('/', () => ({ status: 'Ok', version: '1.0.0' }));
 
-['products', 'productAttributes'].forEach(controller => {
+['products', 'productAttributes', 'users', 'types'].forEach(controller => {
   const controllerClass = `${controller.charAt(0).toUpperCase() + controller.slice(1)}Controller`;
   Route.get(`/${controller}`, `${controllerClass}.index`);
-  Route.post(`/${controller}`, `${controllerClass}.create`);
-  Route.get(`/${controller}/:id`, `${controllerClass}.view`);
+  Route.post(`/${controller}`, `${controllerClass}.store`);
+  Route.get(`/${controller}/:id`, `${controllerClass}.show`);
   Route.put(`/${controller}/:id`, `${controllerClass}.update`);
   Route.patch(`/${controller}/:id`, `${controllerClass}.update`);
-  Route.delete(`/${controller}/:id`, `${controllerClass}.delete`);
+  Route.delete(`/${controller}/:id`, `${controllerClass}.destroy`);
 });
