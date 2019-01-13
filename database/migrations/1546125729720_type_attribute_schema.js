@@ -24,7 +24,7 @@ class TypeAttributeSchema extends Schema {
   }
 
   down() {
-    this.drop('attribute_type');
+    this.dropIfExists('attribute_type');
   }
 }
 

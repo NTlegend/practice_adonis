@@ -2,11 +2,28 @@ const Schema = use('Schema');
 
 class DeleteAttributeTypeSchema extends Schema {
   up() {
-    this.drop('attribute_type');
+    this.dropIfExists('attribute_type');
   }
 
   down() {
-    //
+    this.create('attribute_type', table => {
+      table.increments();
+      table
+        .integer('type_id')
+        .unsigned()
+        .notNullable();
+      table
+        .foreign('type_id')
+        .references('id')
+        .inTable('types')
+        .onDelete('CASCADE');
+      table.integer('attribute_id').unsigned();
+      table
+        .foreign('attribute_id')
+        .references('id')
+        .inTable('attributes')
+        .onDelete('CASCADE');
+    });
   }
 }
 
